@@ -1,10 +1,16 @@
-<!-- login.html -->
 <!doctype html>
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Sign in | SnehaMart</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -37,6 +43,8 @@
 
     </form>
 
+    <p id="message"></p>
+
     <p>
         New here?
         <a href="register.html">Create an account</a>.
@@ -44,28 +52,83 @@
 
 </main>
 
+
 <script>
 
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
+
+const supabaseClient = supabase.createClient(
+    "YOUR_SUPABASE_PROJECT_URL",
+    "YOUR_SUPABASE_PUBLISHABLE_KEY"
+);
+
+
+// ==========================================
+// LOGIN
+// ==========================================
+
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email =
+        document.getElementById("email").value.trim();
 
-    // ADMIN
-    if (email === "admin@snehamart.com" && password === "admin123") {
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    // ======================================
+    // ADMIN LOGIN
+    // ======================================
+
+    if (
+        email === "admin@snehamart.com" &&
+        password === "admin123"
+    ) {
 
         window.location.href = "admin.html";
 
-    } 
-    
-    // NORMAL USER
-    else {
-
-        window.location.href = "product.html";
-
+        return;
     }
+
+
+    // ======================================
+    // NORMAL USER - SUPABASE LOGIN
+    // ======================================
+
+    message.textContent = "Signing in...";
+
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+            password: password
+
+        });
+
+
+    // Login error
+    if (error) {
+
+        message.textContent = error.message;
+
+        return;
+    }
+
+
+    // Login successful
+    message.textContent = "Login successful!";
+
+
+    // Go to SnehaMart collection
+    window.location.href = "product.html";
 
 });
 
