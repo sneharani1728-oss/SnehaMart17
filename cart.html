@@ -4,120 +4,205 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Your Bag | SnehaMart</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <nav class="nav">
-
-    <a class="brand" href="product.html">
-        SnehaMart
-    </a>
+    <a class="brand" href="product.html">SnehaMart</a>
 
     <div class="nav-links">
-
-        <a href="product.html">
-            Continue shopping
-        </a>
-
+        <a href="product.html">Continue Shopping</a>
+        <a href="orders.html">Orders</a>
     </div>
-
 </nav>
 
 
 <main class="section">
 
-    <h2>
-        Your shopping bag
-    </h2>
+    <h2>Your Shopping Bag</h2>
 
-
-    <table class="table">
-
-        <thead>
-
-            <tr>
-                <th>Dress</th>
-                <th>Size</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="cartItems">
-
-        </tbody>
-
-    </table>
-
-
-    <p class="price" id="cartTotal">
-        Total: ₹0
-    </p>
-
-
-    <a
-        class="button"
-        href="orders.html"
-    >
-        Secure checkout
-    </a>
+    <div id="cartContainer"></div>
 
 </main>
 
 
 <script>
 
-    /*
-     * GET CART
-     */
+function loadCart() {
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("snehaMartCart")
-        ) || [];
+    const cart =
+        JSON.parse(localStorage.getItem("snehaMartCart")) || [];
 
-
-    /*
-     * IF CART IS EMPTY,
-     * ADD A DEFAULT PRODUCT
-     */
+    const container =
+        document.getElementById("cartContainer");
 
     if (cart.length === 0) {
 
-        cart.push({
+        container.innerHTML = `
+            <p>Your bag is empty.</p>
 
-            id: "SM-001",
+            <br>
 
-            name: "Rose Silk Anarkali",
+            <a class="button" href="product.html">
+                Continue Shopping
+            </a>
+        `;
 
-            size: "M",
+        return;
+    }
 
-            quantity: 1,
 
-            price: 2499
+    let total = 0;
 
-        });
+    let html = `
+        <table class="table">
 
-        localStorage.setItem(
-            "snehaMartCart",
-            JSON.stringify(cart)
-        );
+            <tr>
+                <th>Dress</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+    `;
+
+
+    cart.forEach(function(item, index) {
+
+        const subtotal =
+            Number(item.price) * Number(item.quantity);
+
+        total += subtotal;
+
+
+        html += `
+            <tr>
+
+                <td>
+                    ${item.name}
+                </td>
+
+                <td>
+                    ${item.size}
+                </td>
+
+                <td>
+                    <button onclick="changeQuantity(${index}, -1)">
+                        -
+                    </button>
+
+                    ${item.quantity}
+
+                    <button onclick="changeQuantity(${index}, 1)">
+                        +
+                    </button>
+                </td>
+
+                <td>
+                    ₹${Number(item.price).toLocaleString("en-IN")}
+                </td>
+
+                <td>
+                    ₹${subtotal.toLocaleString("en-IN")}
+                </td>
+
+                <td>
+                    <button onclick="removeItem(${index})">
+                        Remove
+                    </button>
+                </td>
+
+            </tr>
+        `;
+    });
+
+
+    html += `
+        </table>
+
+        <br>
+
+        <h3>
+            Total: ₹${total.toLocaleString("en-IN")}
+        </h3>
+
+        <br>
+
+        <button class="button" onclick="checkout()">
+            Secure Checkout
+        </button>
+    `;
+
+
+    container.innerHTML = html;
+}
+
+
+
+function changeQuantity(index, change) {
+
+    let cart =
+        JSON.parse(localStorage.getItem("snehaMartCart")) || [];
+
+
+    cart[index].quantity =
+        Number(cart[index].quantity) + change;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
 
     }
 
 
-    /*
-     * DISPLAY CART
-     */
+    localStorage.setItem(
+        "snehaMartCart",
+        JSON.stringify(cart)
+    );
 
-    const cartItems =
-        document.getElementById("cartItems");
+
+    loadCart();
+}
+
+
+
+function removeItem(index) {
+
+    let cart =
+        JSON.parse(localStorage.getItem("snehaMartCart")) || [];
+
+
+    cart.splice(index, 1);
+
+
+    localStorage.setItem(
+        "snehaMartCart",
+        JSON.stringify(cart)
+    );
+
+
+    loadCart();
+}
+
+
+
+function checkout() {
+
+    let cart =
+        JSON.parse(localStorage.getItem("snehaMartCart")) || [];
+
+
+    if (cart.length === 0) {
+
+        alert("Your bag is empty.");
+        return;
+
+    }
 
 
     let total = 0;
@@ -125,61 +210,56 @@
 
     cart.forEach(function(item) {
 
-        const quantity =
-            Number(item.quantity) || 1;
-
-        const price =
-            Number(item.price) || 0;
-
-        const subtotal =
-            quantity * price;
-
-
-        total += subtotal;
-
-
-        const row =
-            document.createElement("tr");
-
-
-        row.innerHTML = `
-
-            <td>
-                ${item.name}
-            </td>
-
-            <td>
-                ${item.size}
-            </td>
-
-            <td>
-                ${quantity}
-            </td>
-
-            <td>
-                ₹${subtotal}
-            </td>
-
-        `;
-
-
-        cartItems.appendChild(row);
+        total +=
+            Number(item.price) *
+            Number(item.quantity);
 
     });
 
 
-    /*
-     * SHOW TOTAL
-     */
+    const order = {
 
-    document.getElementById(
-        "cartTotal"
-    ).textContent =
-        "Total: ₹" + total;
+        id: "SM-" + Date.now(),
+
+        items: cart,
+
+        total: total,
+
+        date: new Date().toLocaleString(),
+
+        status: "Placed"
+
+    };
+
+
+    let orders =
+        JSON.parse(localStorage.getItem("snehaMartOrders")) || [];
+
+
+    orders.push(order);
+
+
+    localStorage.setItem(
+        "snehaMartOrders",
+        JSON.stringify(orders)
+    );
+
+
+    // Empty cart after successful checkout
+    localStorage.removeItem("snehaMartCart");
+
+
+    alert("Order placed successfully!");
+
+
+    window.location.href = "orders.html";
+
+}
+
+
+loadCart();
 
 </script>
 
-
 </body>
-
 </html>
