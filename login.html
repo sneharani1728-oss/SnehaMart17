@@ -1,15 +1,75 @@
 <!-- login.html -->
 <!doctype html>
-<html><head><title>Sign in | SnehaMart</title><link rel="stylesheet" href="style.css"></head>
+<html>
+
+<head>
+    <title>Sign in | SnehaMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
-<nav class="nav"><a class="brand" href="product.html">SnehaMart</a></nav>
+
+<nav class="nav">
+    <a class="brand" href="product.html">SnehaMart</a>
+</nav>
+
 <main class="form">
-  <h1>Welcome back</h1>
-  <form action="product.html">
-    <label>Email<input type="email" required></label>
-    <label>Password<input type="password" required></label><br>
-    <button class="button">Sign in</button>
-  </form>
-  <p>New here? <a href="register.html">Create an account</a>.</p>
+
+    <h1>Welcome back</h1>
+
+    <form id="loginForm">
+
+        <label>
+            Email
+            <input type="email" id="email" required>
+        </label>
+
+        <label>
+            Password
+            <input type="password" id="password" required>
+        </label>
+
+        <br>
+
+        <button class="button" type="submit">
+            Sign in
+        </button>
+
+    </form>
+
+    <p>
+        New here?
+        <a href="register.html">Create an account</a>.
+    </p>
+
 </main>
-</body></html>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    // ADMIN
+    if (email === "admin@snehamart.com" && password === "admin123") {
+
+        window.location.href = "admin.html";
+
+    } 
+    
+    // NORMAL USER
+    else {
+
+        window.location.href = "product.html";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
