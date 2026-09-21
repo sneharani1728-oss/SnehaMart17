@@ -2,588 +2,293 @@
 <html lang="en">
 
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SnehaMart | Luxury Dresses</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
+<nav class="nav">
+    <a class="brand" href="product.html">SnehaMart</a>
 
-    <!-- =========================
-         NAVIGATION
-    ========================== -->
+    <div class="nav-links">
+        <a href="product.html">Collection</a>
+        <a href="cart.html">Bag</a>
+        <a href="orders.html">Orders</a>
+        <a href="login.html">Sign in</a>
+    </div>
+</nav>
 
-    <nav class="nav">
 
-        <a
-            class="brand"
-            href="product.html"
-        >
-            SnehaMart
-        </a>
+<header class="hero">
 
+    <p>THE NEW FESTIVE EDIT</p>
 
-        <div class="nav-links">
+    <h1>Luxury dresses made to be remembered.</h1>
 
-            <a href="product.html">
-                Collection
-            </a>
+    <p>
+        Discover elegant occasionwear, timeless silhouettes, and beautifully
+        crafted styles selected exclusively for SnehaMart.
+    </p>
 
-            <a href="cart.html">
-                Bag
-            </a>
+    <a class="button" href="#collection">
+        Explore collection
+    </a>
 
-            <a href="orders.html">
-                Orders
-            </a>
+</header>
 
-            <a href="login.html">
-                Sign in
-            </a>
 
-        </div>
+<main class="section" id="collection">
 
-    </nav>
+    <h2>Featured collection</h2>
 
+    <div class="grid">
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
+        <!-- ROSE SILK ANARKALI -->
 
-    <header class="hero">
+        <article class="card">
 
-        <p>
-            THE NEW FESTIVE EDIT
-        </p>
+            <div class="product-image-wrap">
 
+                <img
+                    class="product-image"
+                    src="assets/rose-silk-anarkali-front.png"
+                    alt="Rose Silk Anarkali">
 
-        <h1>
-            Luxury dresses made to be remembered.
-        </h1>
+            </div>
 
+            <div class="card-body">
 
-        <p>
-            Discover elegant occasionwear, timeless silhouettes,
-            and beautifully crafted styles selected exclusively
-            for SnehaMart.
-        </p>
+                <h3>Rose Silk Anarkali</h3>
 
+                <p>
+                    Peach silk-blend Anarkali with delicate embroidery
+                    and matching dupatta.
+                </p>
 
-        <a
-            class="button"
-            href="#collection"
-        >
-            Explore collection
-        </a>
+                <p class="price">
+                    ₹2,499
+                </p>
 
-    </header>
+                <a
+                    class="button"
+                    href="#"
+                    onclick="addToBag('Rose Silk Anarkali', 'M', 2499); return false;"
+                >
+                    Add to bag
+                </a>
 
+            </div>
 
+        </article>
 
-    <!-- =========================
-         FEATURED COLLECTION
-    ========================== -->
 
-    <main
-        class="section"
-        id="collection"
-    >
 
-        <h2>
-            Featured collection
-        </h2>
+        <!-- MIDNIGHT BLUE GOWN -->
 
+        <article class="card">
 
-        <!-- IMPORTANT:
-             id="productGrid" is used by JavaScript
-             to add products created by the admin.
-        -->
+            <div class="product-image-wrap">
 
-        <div
-            class="grid"
-            id="productGrid"
-        >
+                <img
+                    class="product-image"
+                    src="assets/midnight-blue-gown-front.png"
+                    alt="Midnight Blue Gown">
 
+            </div>
 
-            <!-- =========================
-                 EXISTING PRODUCT 1
-            ========================== -->
+            <div class="card-body">
 
-            <article class="card">
+                <h3>Midnight Blue Gown</h3>
 
-                <div class="product-image-wrap">
+                <p>
+                    Velvet evening gown with embellished detailing
+                    and a dramatic flowing train.
+                </p>
 
-                    <img
-                        class="product-image"
-                        src="assets/rose-silk-anarkali-front.png"
-                        alt="Model wearing Rose Silk Anarkali"
-                    >
+                <p class="price">
+                    ₹3,299
+                </p>
 
-                </div>
+                <a
+                    class="button"
+                    href="#"
+                    onclick="addToBag('Midnight Blue Gown', 'M', 3299); return false;"
+                >
+                    Add to bag
+                </a>
 
+            </div>
 
-                <div class="card-body">
+        </article>
 
-                    <h3>
-                        Rose Silk Anarkali
-                    </h3>
 
 
-                    <p>
-                        Peach silk-blend Anarkali with
-                        delicate embroidery and matching dupatta.
-                    </p>
+        <!-- IVORY EMBROIDERED KURTI -->
 
+        <article class="card">
 
-                    <p class="view-note">
-                        Available with front and back
-                        product views.
-                    </p>
+            <div class="product-image-wrap">
 
+                <img
+                    class="product-image"
+                    src="assets/ivory-embroidered-kurti.png"
+                    alt="Ivory Embroidered Kurti">
 
-                    <p class="price">
-                        ₹2,499
-                    </p>
+            </div>
 
+            <div class="card-body">
 
-                    <a
-                        class="button"
-                        href="cart.html"
-                    >
-                        Add to bag
-                    </a>
+                <h3>Ivory Embroidered Kurti</h3>
 
-                </div>
+                <p>
+                    Graceful ivory kurti with detailed golden embroidery
+                    and a soft flowing dupatta.
+                </p>
 
-            </article>
+                <p class="price">
+                    ₹1,899
+                </p>
 
+                <a
+                    class="button"
+                    href="#"
+                    onclick="addToBag('Ivory Embroidered Kurti', 'M', 1899); return false;"
+                >
+                    Add to bag
+                </a>
 
+            </div>
 
-            <!-- =========================
-                 EXISTING PRODUCT 2
-            ========================== -->
+        </article>
 
-            <article class="card">
 
-                <div class="product-image-wrap">
+    </div>
 
-                    <img
-                        class="product-image"
-                        src="assets/midnight-blue-gown-front.png"
-                        alt="Model wearing Midnight Blue Gown"
-                    >
+</main>
 
-                </div>
 
 
-                <div class="card-body">
+<!-- SNEHAMART PROMISE -->
 
-                    <h3>
-                        Midnight Blue Gown
-                    </h3>
+<section class="section">
 
+    <h2>The SnehaMart promise</h2>
 
-                    <p>
-                        Velvet evening gown with
-                        embellished detailing and a
-                        dramatic flowing train.
-                    </p>
+    <div class="grid">
 
+        <article class="card">
 
-                    <p class="view-note">
-                        Available with front and back
-                        product views.
-                    </p>
+            <div class="card-body">
 
+                <h3>Curated elegance</h3>
 
-                    <p class="price">
-                        ₹3,299
-                    </p>
+                <p>
+                    Distinctive styles chosen for weddings,
+                    celebrations, and unforgettable moments.
+                </p>
 
+            </div>
 
-                    <a
-                        class="button"
-                        href="cart.html"
-                    >
-                        Add to bag
-                    </a>
+        </article>
 
-                </div>
 
-            </article>
+        <article class="card">
 
+            <div class="card-body">
 
+                <h3>Quality first</h3>
 
-            <!-- =========================
-                 EXISTING PRODUCT 3
-            ========================== -->
+                <p>
+                    Detailed craftsmanship, premium fabrics,
+                    and thoughtful finishing in every piece.
+                </p>
 
-            <article class="card">
+            </div>
 
-                <div class="product-image-wrap">
+        </article>
 
-                    <img
-                        class="product-image"
-                        src="assets/ivory-embroidered-kurti.png"
-                        alt="Ivory Embroidered Kurti neckline detail"
-                    >
 
-                </div>
+        <article class="card">
 
+            <div class="card-body">
 
-                <div class="card-body">
+                <h3>Made for celebrations</h3>
 
-                    <h3>
-                        Ivory Embroidered Kurti
-                    </h3>
+                <p>
+                    Find your perfect look for festive evenings,
+                    parties, and special occasions.
+                </p>
 
+            </div>
 
-                    <p>
-                        Graceful ivory kurti with detailed
-                        golden embroidery and a soft
-                        flowing dupatta.
-                    </p>
+        </article>
 
+    </div>
 
-                    <p class="view-note">
-                        Hand-embellished neckline detail.
-                    </p>
+</section>
 
 
-                    <p class="price">
-                        ₹1,899
-                    </p>
 
+<footer class="footer">
 
-                    <a
-                        class="button"
-                        href="cart.html"
-                    >
-                        Add to bag
-                    </a>
+    © 2026 SnehaMart · Luxury fashion, thoughtfully chosen.
 
-                </div>
+</footer>
 
-            </article>
 
 
-            <!--
-                ADMIN PRODUCTS WILL BE ADDED HERE
-                AUTOMATICALLY BY JAVASCRIPT.
-            -->
+<script>
 
+function addToBag(name, size, price) {
 
-        </div>
+    let cart =
+        JSON.parse(localStorage.getItem("snehaMartCart")) || [];
 
-    </main>
 
+    const existing = cart.find(function(item) {
 
+        return item.name === name && item.size === size;
 
-    <!-- =========================
-         SNEHAMART PROMISE
-    ========================== -->
+    });
 
-    <section class="section">
 
-        <h2>
-            The SnehaMart promise
-        </h2>
+    if (existing) {
 
+        existing.quantity =
+            Number(existing.quantity) + 1;
 
-        <div class="grid">
+    } else {
 
+        cart.push({
 
-            <!-- PROMISE 1 -->
+            name: name,
 
-            <article class="card">
+            size: size,
 
-                <div class="card-body">
+            price: Number(price),
 
-                    <h3>
-                        Curated elegance
-                    </h3>
-
-
-                    <p>
-                        Distinctive styles chosen for
-                        weddings, celebrations, and
-                        unforgettable moments.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- PROMISE 2 -->
-
-            <article class="card">
-
-                <div class="card-body">
-
-                    <h3>
-                        Quality first
-                    </h3>
-
-
-                    <p>
-                        Detailed craftsmanship,
-                        premium fabrics, and thoughtful
-                        finishing in every piece.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- PROMISE 3 -->
-
-            <article class="card">
-
-                <div class="card-body">
-
-                    <h3>
-                        Made for celebrations
-                    </h3>
-
-
-                    <p>
-                        Find your perfect look for
-                        festive evenings, parties,
-                        and special occasions.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer class="footer">
-
-        © 2026 SnehaMart · Luxury fashion,
-        thoughtfully chosen.
-
-    </footer>
-
-
-
-    <!-- =========================
-         JAVASCRIPT
-         LOAD ADMIN PRODUCTS
-    ========================== -->
-
-    <script>
-
-
-        /*
-         * Get products added by Admin.
-         *
-         * These products are stored in:
-         *
-         * localStorage
-         *
-         */
-
-        const products =
-            JSON.parse(
-                localStorage.getItem(
-                    "snehaMartProducts"
-                )
-            ) || [];
-
-
-
-        /*
-         * Find the product grid.
-         *
-         * This is why we added:
-         *
-         * id="productGrid"
-         *
-         * to the collection grid.
-         */
-
-        const productGrid =
-            document.getElementById(
-                "productGrid"
-            );
-
-
-
-        /*
-         * Display every product
-         * added by the Admin.
-         */
-
-        products.forEach(function(product) {
-
-
-            /*
-             * Create a new product card.
-             */
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            /*
-             * Use the same card style
-             * as your existing products.
-             */
-
-            card.className = "card";
-
-
-
-            /*
-             * Create the product HTML.
-             */
-
-            card.innerHTML = `
-
-                <div class="product-image-wrap">
-
-                    <img
-                        class="product-image"
-                        src="${product.image}"
-                        alt="${product.name}"
-                    >
-
-                </div>
-
-
-                <div class="card-body">
-
-                    <p class="view-note">
-                        ${product.category}
-                    </p>
-
-
-                    <h3>
-                        ${product.name}
-                    </h3>
-
-
-                    <p>
-                        Size:
-                        ${product.size}
-                    </p>
-
-
-                    <p>
-                        Available Stock:
-                        ${product.stock}
-                    </p>
-
-
-                    <p class="price">
-                        ₹${product.price}
-                    </p>
-
-
-                    <a
-                        class="button"
-                        href="cart.html"
-                        onclick="addToBag('${product.id}')"
-                    >
-                        Add to bag
-                    </a>
-
-                </div>
-
-            `;
-
-
-            /*
-             * Put the new card
-             * inside the collection.
-             */
-
-            productGrid.appendChild(
-                card
-            );
+            quantity: 1
 
         });
 
+    }
 
 
-        /*
-         * ADD TO BAG
-         */
-
-        function addToBag(productId) {
-
-
-            /*
-             * Get products again.
-             */
-
-            const products =
-                JSON.parse(
-                    localStorage.getItem(
-                        "snehaMartProducts"
-                    )
-                ) || [];
+    localStorage.setItem(
+        "snehaMartCart",
+        JSON.stringify(cart)
+    );
 
 
-            /*
-             * Find selected product.
-             */
+    alert(name + " added to your bag!");
 
-            const product =
-                products.find(
-                    function(p) {
+}
 
-                        return p.id === productId;
-
-                    }
-                );
-
-
-            /*
-             * Show confirmation.
-             */
-
-            if (product) {
-
-                alert(
-                    product.name +
-                    " added to your bag!"
-                );
-
-            }
-
-        }
-
-
-    </script>
+</script>
 
 
 </body>
