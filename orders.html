@@ -1,14 +1,142 @@
-<!-- orders.html -->
 <!doctype html>
-<html><head><title>Orders | SnehaMart</title><link rel="stylesheet" href="style.css"></head>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Orders | SnehaMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
-<nav class="nav"><a class="brand" href="product.html">SnehaMart</a></nav>
+
+<nav class="nav">
+
+    <a class="brand" href="product.html">
+        SnehaMart
+    </a>
+
+    <div class="nav-links">
+
+        <a href="product.html">
+            Collection
+        </a>
+
+        <a href="cart.html">
+            Bag
+        </a>
+
+    </div>
+
+</nav>
+
+
 <main class="section">
-  <h2>Your orders</h2>
-  <p class="notice">Order SM-DEMO2026 · Placed · Estimated delivery in 4–6 days.</p>
-  <table class="table">
-    <tr><th>Order</th><th>Dress</th><th>Total</th><th>Status</th></tr>
-    <tr><td>SM-DEMO2026</td><td>Rose Silk Anarkali</td><td>₹2,499</td><td>Placed</td></tr>
-  </table>
+
+    <h2>Your Orders</h2>
+
+    <div id="ordersContainer"></div>
+
 </main>
-</body></html>
+
+
+<script>
+
+function loadOrders() {
+
+    const orders =
+        JSON.parse(localStorage.getItem("snehaMartOrders")) || [];
+
+
+    const container =
+        document.getElementById("ordersContainer");
+
+
+    if (orders.length === 0) {
+
+        container.innerHTML = `
+            <p>No orders yet.</p>
+
+            <br>
+
+            <a class="button" href="product.html">
+                Start Shopping
+            </a>
+        `;
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    orders.forEach(function(order) {
+
+        html += `
+            <article class="card">
+
+                <div class="card-body">
+
+                    <h3>
+                        Order ${order.id}
+                    </h3>
+
+                    <p>
+                        Date: ${order.date}
+                    </p>
+
+                    <p>
+                        Status: ${order.status}
+                    </p>
+
+                    <hr>
+
+        `;
+
+
+        order.items.forEach(function(item) {
+
+            html += `
+                <p>
+                    ${item.name}
+                    × ${item.quantity}
+                    — ₹${(
+                        Number(item.price) *
+                        Number(item.quantity)
+                    ).toLocaleString("en-IN")}
+                </p>
+            `;
+
+        });
+
+
+        html += `
+                    <h3>
+                        Total:
+                        ₹${Number(order.total)
+                            .toLocaleString("en-IN")}
+                    </h3>
+
+                </div>
+
+            </article>
+
+            <br>
+        `;
+
+    });
+
+
+    container.innerHTML = html;
+
+}
+
+
+loadOrders();
+
+</script>
+
+</body>
+</html>
