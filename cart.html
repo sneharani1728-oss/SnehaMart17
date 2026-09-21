@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Your Bag | SnehaMart</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="nav">
+
+        <a
+            class="brand"
+            href="product.html"
+        >
+            SnehaMart
+        </a>
+
+        <div class="nav-links">
+
+            <a href="product.html">
+                Continue shopping
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="section">
+
+        <!-- LIVE PRODUCT COUNT -->
+
+        <h2>
+            Your shopping bag
+            (<span id="productCount">0</span>)
+        </h2>
+
+
+        <!-- PRODUCTS -->
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Dress
+                    </th>
+
+                    <th>
+                        Size
+                    </th>
+
+                    <th>
+                        Quantity
+                    </th>
+
+                    <th>
+                        Price
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="cartItems">
+
+            </tbody>
+
+        </table>
+
+
+        <!-- TOTAL -->
+
+        <p
+            class="price"
+            id="cartTotal"
+        >
+            Total: ₹0
+        </p>
+
+
+        <a
+            class="button"
+            href="orders.html"
+        >
+            Secure checkout
+        </a>
+
+    </main>
+
+
+    <script>
+
+        /*
+         * GET PRODUCTS ADDED BY ADMIN
+         */
+
+        const products =
+            JSON.parse(
+                localStorage.getItem(
+                    "snehaMartProducts"
+                )
+            ) || [];
+
+
+        /*
+         * SHOW PRODUCTS
+         */
+
+        const cartItems =
+            document.getElementById(
+                "cartItems"
+            );
+
+
+        let total = 0;
+
+
+        products.forEach(function(product) {
+
+            /*
+             * ONLY SHOW PRODUCTS
+             * THAT HAVE STOCK
+             */
+
+            if (Number(product.stock) > 0) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${product.name}
+                    </td>
+
+                    <td>
+                        ${product.size}
+                    </td>
+
+                    <td>
+                        1
+                    </td>
+
+                    <td>
+                        ₹${product.price}
+                    </td>
+
+                `;
+
+
+                cartItems.appendChild(row);
+
+
+                /*
+                 * ADD PRICE
+                 */
+
+                total =
+                    total +
+                    Number(product.price);
+
+            }
+
+        });
+
+
+        /*
+         * LIVE PRODUCT COUNT
+         */
+
+        const activeProducts =
+            products.filter(function(product) {
+
+                return Number(product.stock) > 0;
+
+            });
+
+
+        document.getElementById(
+            "productCount"
+        ).textContent =
+            activeProducts.length;
+
+
+        /*
+         * TOTAL PRICE
+         */
+
+        document.getElementById(
+            "cartTotal"
+        ).textContent =
+            "Total: ₹" + total;
+
+
+        /*
+         * IF THERE ARE NO PRODUCTS
+         */
+
+        if (activeProducts.length === 0) {
+
+            cartItems.innerHTML = `
+
+                <tr>
+
+                    <td colspan="4">
+
+                        Your bag is empty.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
