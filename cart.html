@@ -2,238 +2,183 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Your Bag | SnehaMart</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <nav class="nav">
+<nav class="nav">
 
-        <a
-            class="brand"
-            href="product.html"
-        >
-            SnehaMart
+    <a class="brand" href="product.html">
+        SnehaMart
+    </a>
+
+    <div class="nav-links">
+
+        <a href="product.html">
+            Continue shopping
         </a>
 
-        <div class="nav-links">
+    </div>
 
-            <a href="product.html">
-                Continue shopping
-            </a>
-
-        </div>
-
-    </nav>
+</nav>
 
 
-    <main class="section">
+<main class="section">
 
-        <!-- LIVE PRODUCT COUNT -->
-
-        <h2>
-            Your shopping bag
-            (<span id="productCount">0</span>)
-        </h2>
+    <h2>
+        Your shopping bag
+    </h2>
 
 
-        <!-- PRODUCTS -->
+    <table class="table">
 
-        <table class="table">
+        <thead>
 
-            <thead>
+            <tr>
+                <th>Dress</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
 
-                <tr>
+        </thead>
 
-                    <th>
-                        Dress
-                    </th>
+        <tbody id="cartItems">
 
-                    <th>
-                        Size
-                    </th>
+        </tbody>
 
-                    <th>
-                        Quantity
-                    </th>
-
-                    <th>
-                        Price
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="cartItems">
-
-            </tbody>
-
-        </table>
+    </table>
 
 
-        <!-- TOTAL -->
-
-        <p
-            class="price"
-            id="cartTotal"
-        >
-            Total: ₹0
-        </p>
+    <p class="price" id="cartTotal">
+        Total: ₹0
+    </p>
 
 
-        <a
-            class="button"
-            href="orders.html"
-        >
-            Secure checkout
-        </a>
+    <a
+        class="button"
+        href="orders.html"
+    >
+        Secure checkout
+    </a>
 
-    </main>
-
-
-    <script>
-
-        /*
-         * GET PRODUCTS ADDED BY ADMIN
-         */
-
-        const products =
-            JSON.parse(
-                localStorage.getItem(
-                    "snehaMartProducts"
-                )
-            ) || [];
+</main>
 
 
-        /*
-         * SHOW PRODUCTS
-         */
+<script>
 
-        const cartItems =
-            document.getElementById(
-                "cartItems"
-            );
+    /*
+     * GET CART
+     */
 
-
-        let total = 0;
-
-
-        products.forEach(function(product) {
-
-            /*
-             * ONLY SHOW PRODUCTS
-             * THAT HAVE STOCK
-             */
-
-            if (Number(product.stock) > 0) {
-
-                const row =
-                    document.createElement("tr");
+    let cart =
+        JSON.parse(
+            localStorage.getItem("snehaMartCart")
+        ) || [];
 
 
-                row.innerHTML = `
+    /*
+     * IF CART IS EMPTY,
+     * ADD A DEFAULT PRODUCT
+     */
 
-                    <td>
-                        ${product.name}
-                    </td>
+    if (cart.length === 0) {
 
-                    <td>
-                        ${product.size}
-                    </td>
+        cart.push({
 
-                    <td>
-                        1
-                    </td>
+            id: "SM-001",
 
-                    <td>
-                        ₹${product.price}
-                    </td>
+            name: "Rose Silk Anarkali",
 
-                `;
+            size: "M",
 
+            quantity: 1,
 
-                cartItems.appendChild(row);
-
-
-                /*
-                 * ADD PRICE
-                 */
-
-                total =
-                    total +
-                    Number(product.price);
-
-            }
+            price: 2499
 
         });
 
+        localStorage.setItem(
+            "snehaMartCart",
+            JSON.stringify(cart)
+        );
 
-        /*
-         * LIVE PRODUCT COUNT
-         */
-
-        const activeProducts =
-            products.filter(function(product) {
-
-                return Number(product.stock) > 0;
-
-            });
+    }
 
 
-        document.getElementById(
-            "productCount"
-        ).textContent =
-            activeProducts.length;
+    /*
+     * DISPLAY CART
+     */
+
+    const cartItems =
+        document.getElementById("cartItems");
 
 
-        /*
-         * TOTAL PRICE
-         */
-
-        document.getElementById(
-            "cartTotal"
-        ).textContent =
-            "Total: ₹" + total;
+    let total = 0;
 
 
-        /*
-         * IF THERE ARE NO PRODUCTS
-         */
+    cart.forEach(function(item) {
 
-        if (activeProducts.length === 0) {
+        const quantity =
+            Number(item.quantity) || 1;
 
-            cartItems.innerHTML = `
+        const price =
+            Number(item.price) || 0;
 
-                <tr>
+        const subtotal =
+            quantity * price;
 
-                    <td colspan="4">
 
-                        Your bag is empty.
+        total += subtotal;
 
-                    </td>
 
-                </tr>
+        const row =
+            document.createElement("tr");
 
-            `;
 
-        }
+        row.innerHTML = `
 
-    </script>
+            <td>
+                ${item.name}
+            </td>
+
+            <td>
+                ${item.size}
+            </td>
+
+            <td>
+                ${quantity}
+            </td>
+
+            <td>
+                ₹${subtotal}
+            </td>
+
+        `;
+
+
+        cartItems.appendChild(row);
+
+    });
+
+
+    /*
+     * SHOW TOTAL
+     */
+
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
+        "Total: ₹" + total;
+
+</script>
+
 
 </body>
 
